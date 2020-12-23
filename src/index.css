@@ -1,0 +1,56 @@
+.wrapper {
+  max-width: 375px;
+  width: 100%;
+  margin: auto;
+}
+
+.staton-head {
+  background: greenyellow;
+}
+
+.station-detail {
+  border-bottom: 2px solid grey;
+  padding: 5px 0;
+}
+
+.station-detail:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.bus-name {
+  float: left;
+}
+
+.bus-name .bus-num {
+  margin-right: 25px;
+}
+
+.bus-status {
+  float: right;
+}
+
+.status {
+  color: #fff;
+  margin: auto;
+  padding: 2px;
+  max-width: 80px;
+  text-align: center;
+  word-break: break-all;
+  font-weight: 600;
+  line-height: 1.2;
+  font-size: 1rem;
+  border-style: solid;
+  border-width: 1.5px;
+  border-radius: 10000px;
+  font-family: 微軟正黑體, "Noto Sans TC", Roboto;
+}
+
+.isOff {
+  background-color: #6c757d;
+}
+
+.isCome {
+  background-color: #28a745;
+}
