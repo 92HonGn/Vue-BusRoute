@@ -1,7 +1,12 @@
 <template>
   <div class="wrapper">
-    <station-head :stationname="state.name" />
-    <station-lists :busData="state.rawData" />
+    <station-head 
+      :stationname="state.name" 
+    />
+    <station-lists 
+      :busData="state.rawData" 
+      :inputData="state.inputAarray" 
+    />
   </div>
 </template>
 
@@ -55,8 +60,8 @@ export default {
         state.rawData = result.station.routes.edges;
         console.log(state.rawData);
 
-        state.inputlength = result.station.routes.edges.length;
 
+        state.inputlength = result.station.routes.edges.length;
         for (let i=0; i < state.inputlength; i++){
           state.inputAarray.push({
             xno: state.rawData[i].node.id,
@@ -64,7 +69,6 @@ export default {
             goBack: state.rawData[i].goBack,
           })
         }
-        console.log("inputArray",state.inputAarray);
       };
 
       onMounted(() => {

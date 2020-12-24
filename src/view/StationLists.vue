@@ -3,7 +3,9 @@
     <station-detail 
       v-for="item in busData" 
       :key="item.sid" 
-      :stdetail="item" />
+      :stDetail="item" 
+      :inputTarget="inputData"
+      />
   </div>
 </template>
 
@@ -16,6 +18,7 @@ export default {
   name: "StationLists",
   props: {
     busData: Object,
+    inputData: Object,
   },
   setup(props, context) {
     const state = reactive({
