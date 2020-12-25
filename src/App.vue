@@ -1,19 +1,24 @@
 <template>
   <div class="wrapper">
+
     <station-head 
       :stationname="state.name" 
     />
+
     <station-lists 
       :busData="state.rawData" 
       :inputData="state.inputAarray" 
     />
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import * as Constants from "./Constants";
+
 import { computed, reactive, onMounted } from "vue";
+
 import StationHead from "./view/StationHead.vue";
 import StationLists from "./view/StationLists.vue";
 
@@ -56,11 +61,14 @@ export default {
         }
       );
         const result = queryResult.data.data;
+
         state.data.busName = result.station.name;
+
         state.rawData = result.station.routes.edges;
         console.log(state.rawData);
 
 
+        // 組合陣列
         state.inputlength = result.station.routes.edges.length;
         for (let i=0; i < state.inputlength; i++){
           state.inputAarray.push({
@@ -69,6 +77,7 @@ export default {
             goBack: state.rawData[i].goBack,
           })
         }
+
       };
 
       onMounted(() => {

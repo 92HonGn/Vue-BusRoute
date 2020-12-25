@@ -21,7 +21,7 @@
 
 <script>
 import axios from "axios";
-import * as Constants from "./Constants";
+import * as Constants from "../Constants";
 import { reactive, onMounted, computed } from "vue";
 
 export default {
@@ -36,37 +36,17 @@ export default {
       routename: props.stDetail.node.destination,
       inputs: props.inputTarget
     });
+    
     const fetchStatus = async () => {
       const queryResult = await axios.post(
         Constants.GRAPHQL_API,
         {
-          query: `
-            query{
-              	stopEstimates(targets: ${JSON.stringify(state.inputs)}){
-                  isOperationDay #如果為false，則"今日未營運"
-                  isSuspended #如果為真，則"末班駛離"
-                  
-                  # 以下兩者之一如果為真，則"改道..."
-                  isConstruction
-                  isEvent
-                  
-                  # 如果etas是空的，則顯示comeTime
-                  comeTime
-                  # etas如果有資料則依照一下邏輯
-                  # etaTime < 3, "進站中"
-                  # >= 3 or <= 5，則是"即將到站"
-                  # > 5，則是"{N} 分"
-                  etas {
-                  eta
-                  }
-                }
-            }
-          `,
+          query: Constants.QUERY_ETAS_SCHEMA,
+          variables: { etaTargets: JSON.stringify(state.inputs), etaLang: "zh"},
         }
       );
       const result = queryResult.data.data;
       console.log(result);
-
     };
 
     onMounted(() => {
