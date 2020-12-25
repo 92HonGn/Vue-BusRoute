@@ -37,21 +37,21 @@ export default {
       inputs: props.inputTarget
     });
     
-    const fetchStatus = async () => {
-      const queryResult = await axios.post(
-        Constants.GRAPHQL_API,
-        {
-          query: Constants.QUERY_ETAS_SCHEMA,
-          variables: { etaTargets: JSON.stringify(state.inputs), etaLang: "zh"},
-        }
-      );
-      const result = queryResult.data.data;
-      console.log(result);
-    };
+    // const fetchStatus = async () => {
+    //   const queryResult = await axios.post(
+    //     Constants.GRAPHQL_API,
+    //     {
+    //       query: Constants.QUERY_ETAS_SCHEMA,
+    //       variables: { etaTargets: JSON.stringify(state.inputs), etaLang: "zh"},
+    //     }
+    //   );
+    //   const result = queryResult.data.data;
+    //   console.log(result);
+    // };
 
-    onMounted(() => {
-      fetchStatus();
-    });
+    // onMounted(() => {
+    //   fetchStatus();
+    // });
 
     return {
       state,
