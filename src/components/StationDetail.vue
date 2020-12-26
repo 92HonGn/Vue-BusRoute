@@ -1,8 +1,10 @@
 <template>
   <div class="station-detail">
     <div class="bus-name">
-      <span class="bus-num">{{ routeName }}</span>
-      <span class="bus-route">{{ `往 ${destination}` }}</span>
+      <div>
+        <span class="bus-num">{{ routeName }}</span>
+        <span class="bus-route">{{ `往 ${destination}` }}</span>
+      </div>
       <bus-status :nowstatus="estimateTimeData" />
     </div>
 
@@ -61,4 +63,9 @@ export default {
 
 
 <style scoped>
+.bus-name {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 </style>
