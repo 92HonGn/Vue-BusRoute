@@ -21,7 +21,7 @@ export default {
     busData: Object,
   },
   computed: {
-    estimateTimeData(index=0) {
+    estimateTimeData() {
       return (index=0) => {
       // console.log(this.$props.estimateTimeDataList[index])
         return this.$props.estimateTimeDataList[index]

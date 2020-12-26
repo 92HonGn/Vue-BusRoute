@@ -1,3 +1,8 @@
+export const getEtaFromEtas = (etas=[{ eta: 0, }]) => {
+  const numEtas = etas.map(e => e.eta)
+  return Math.min(...numEtas)
+}
+
 const getEstimateTimeStatus = (estimateTimeData) => {
   if(!estimateTimeData) {
     return ''
@@ -5,14 +10,13 @@ const getEstimateTimeStatus = (estimateTimeData) => {
     if (estimateTimeData.etas.length === 0) {
       return estimateTimeData.comeTime;
     } else if (estimateTimeData.etas.length !== 0) {
-      if (estimateTimeData.etas.eta < 3) {
+      const etaMin = getEtaFromEtas(estimateTimeData.etas)
+      if (etaMin < 3) {
         return "進站中";
-      } else if (estimateTimeData.etas.eta >= 3 && estimateTimeData.etas.eta <= 5) {
+      } else if (etaMin >= 3 && etaMin <= 5) {
         return "即將到站";
-      } else if (estimateTimeData.etas.eta > 5) {
-        return `${estimateTimeData.etas.eta}`;
       } else {
-        console.log(`約 ${estimateTimeData.comeTime}`);
+        return etaMin;
       }
     } else if (estimateTimeData.isOperationDay === false) {
       return "今日未營運";
