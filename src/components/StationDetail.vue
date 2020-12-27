@@ -1,8 +1,11 @@
 <template>
   <div class="station-detail">
     <div class="bus-name">
-      <span class="bus-num">{{ state.xno }}</span>
-      <span class="bus-route">{{ state.routename }}</span>
+      <div>
+        <span class="bus-num">{{ routeName }}</span>
+        <span class="bus-route">{{ `往 ${destination}` }}</span>
+      </div>
+      <bus-status :nowstatus="estimateTimeData" />
     </div>
 
     <div class="bus-status">
@@ -23,46 +26,46 @@
 import axios from "axios";
 import * as Constants from "../Constants";
 import { reactive, onMounted, computed } from "vue";
+import BusStatus from './BusStatus.vue';
 
 export default {
   name: "StationDetail",
   props: {
+    estimateTimeData: Object,
     stDetail: Object,
-    inputTarget: Object,
+  },
+  watch: {
+    ['this']() {
+      console.log(this.$props)
+    }
+  },
+  computed: {
+    routeName() {
+    // console.log(this.$props)
+    // console.log(this.$props.stDetail)
+      return this.$props.stDetail.node.name
+    },
+    destination() {
+      return this.$props.stDetail.node.destination
+    },
+    // estimateTimeData() {
+    //   return {}
+    //   // return this.$props.
+    // },
   },
   setup(props, context) {
-    const state = reactive({
-      xno: props.stDetail.node.id,
-      routename: props.stDetail.node.destination,
-      inputs: props.inputTarget
-    });
-    
-    // const fetchStatus = async () => {
-    //   const queryResult = await axios.post(
-    //     Constants.GRAPHQL_API,
-    //     {
-    //       query: Constants.QUERY_ETAS_SCHEMA,
-    //       variables: { etaTargets: JSON.stringify(state.inputs), etaLang: "zh"},
-    //     }
-    //   );
-    //   const result = queryResult.data.data;
-    //   console.log(result);
-    // };
-
-    // onMounted(() => {
-    //   fetchStatus();
-    // });
-
-    return {
-      state,
-    };
-
   },
   components: {
+    BusStatus
   },
 };
 </script>
 
 
 <style scoped>
+.bus-name {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 </style>

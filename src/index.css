@@ -33,7 +33,7 @@
 
 .status {
   color: #fff;
-  margin: auto;
+  /* margin: auto; */
   padding: 2px;
   max-width: 80px;
   text-align: center;

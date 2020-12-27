@@ -6,8 +6,8 @@
     />
 
     <station-lists 
-      :busData="state.rawData" 
-      :inputData="state.inputAarray" 
+      :busData="state.rawData"
+      :estimateTimeDataList="state.estimateTimeDataList" 
     />
 
   </div>
@@ -32,6 +32,7 @@ export default {
       },
       name: computed(() => (state.data.busName ? state.data.busName : "")),
       rawData: [],
+      estimateTimeDataList: [],
       inputAarray:[],
       inputlength:0,
     });
@@ -51,6 +52,7 @@ export default {
                     goBack
                     node {
                       id
+                      name
                       departure
                       destination     
                     }
@@ -66,7 +68,7 @@ export default {
       state.data.busName = result.station.name;
 
       state.rawData = result.station.routes.edges;
-      console.log(state.rawData);
+      // console.log(state.rawData);
 
       // 組合陣列
       state.inputlength = result.station.routes.edges.length;
@@ -91,11 +93,14 @@ export default {
     watch(state.inputAarray, (val, prevVal) => {
       if(val.length > 0) {
         handleQuery(state.inputAarray)
+          .then(res => res.json())
           .then(res => {
-            console.log(res)
+            // console.log(res)
+            state.estimateTimeDataList = res.data.stopEstimates
           })
       }
     })
+    console.log(state.estimateTimeDataList)
 
     return {
       state,
