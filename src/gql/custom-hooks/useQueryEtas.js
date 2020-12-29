@@ -1,14 +1,15 @@
-import { GRAPHQL_API } from "../../Constants"
+import { GRAPHQL_API } from "../../lib/variables/constants"
 import { QUERY_ETAS_SCHEMA } from '../schema'
 
 const initEstimateStopInput = [{
-  stationId: 11,
-  goBack: 2,
-  xno: 50861,
+  xno: 108,
+  sid: 7202,
+  goBack: 1,
 }]
+const initEstimateStopLang = "zh";
 
 const useQueryEtas = () => {
-  const handleQuery = (inputs=initEstimateStopInput) => {
+  const handleQuery = (inputs = initEstimateStopInput, inputsLang = initEstimateStopLang) => {
     return fetch(GRAPHQL_API, {
       method: 'POST',
       headers: {
@@ -19,7 +20,7 @@ const useQueryEtas = () => {
         query: QUERY_ETAS_SCHEMA,
         variables: {
           etaTargets: inputs, 
-          etaLang: 'zh'
+          etaLang: inputsLang
         }
       })
     })

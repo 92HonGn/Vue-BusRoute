@@ -1,15 +1,18 @@
 <template>
   <div class="staton-lists">
+
     <station-detail 
       v-for="(item, i) in busData" 
-      :key="item.sid" 
+      :key="item.node.id" 
       :stDetail="item"
-      :estimateTimeData="estimateTimeData(i)"
-    />
+      :estimateStatus="state.estimateStatus(i)"
+      />
+
   </div>
 </template>
 
 <script>
+
 import { reactive, onMounted, computed } from "vue";
 
 import StationDetail from "../components/StationDetail.vue";
@@ -17,28 +20,35 @@ import StationDetail from "../components/StationDetail.vue";
 export default {
   name: "StationLists",
   props: {
-    estimateTimeDataList: Object,
     busData: Object,
-  },
-  computed: {
-    estimateTimeData() {
-      return (index=0) => {
-      // console.log(this.$props.estimateTimeDataList[index])
-        return this.$props.estimateTimeDataList[index]
-      }
-    }
+    estimateStatusList: Object,
   },
   setup(props, context) {
+
     const state = reactive({
+
+      estimateStatus: computed(() => {
+
+        return ( index=0 ) => {
+          return props.estimateStatusList[index]
+        }
+
+      })
+
     });
+
     onMounted(() => {
     });
+
     return {
       state,
     };
+
   },
   components: {
+
     StationDetail,
+
   },
 };
 </script>

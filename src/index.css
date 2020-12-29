@@ -19,21 +19,14 @@
   clear: both;
 }
 
-.bus-name {
-  float: left;
-}
-
-.bus-name .bus-num {
-  margin-right: 25px;
-}
-
-.bus-status {
-  float: right;
+.bus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .status {
   color: #fff;
-  /* margin: auto; */
   padding: 2px;
   max-width: 80px;
   text-align: center;
@@ -45,6 +38,18 @@
   border-width: 1.5px;
   border-radius: 10000px;
   font-family: 微軟正黑體, "Noto Sans TC", Roboto;
+}
+
+.isCloseTime{
+  background-color: #ffc107;
+}
+
+.isCloseDis{
+  background-color: rgb(255, 25, 0);
+} 
+
+.isComing{
+  background-color: rgb(255, 132, 0);
 }
 
 .isOff {
